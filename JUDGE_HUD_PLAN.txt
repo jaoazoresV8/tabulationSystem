@@ -1,0 +1,66 @@
+================================================================================
+PROJECT: JUDGE HUD - TACTICAL SCORING INTERFACE (HUD-01)
+ARCHITECTURE: LARAVEL + BLADE + TAILWIND + YOUTUBE IFRAME API
+AESTHETIC: VALORANT-INSPIRED TACTICAL INTERFACE
+================================================================================
+
+1. SYSTEM LOGIC & WORKFLOW
+--------------------------------------------------------------------------------
+- TARGETING: System automatically detects the 'Active' Exposure set by Admin.
+- DYNAMIC CRITERIA: Loads specific criteria (Weight/Max) for the active node.
+- FLOW: Judge selects contestant -> Performance loads -> Judge inputs scores ->
+        Real-time calculation -> Submit -> Auto-move to next contestant.
+
+2. JUDGE AUTHENTICATION & ACCESS
+--------------------------------------------------------------------------------
+- SECURE CODE: Judges access via a unique 6-character 'Tactical Access Code'.
+- SESSION ROUTING: Code identifies the specific Contest and Judge ID.
+- DIRECT ENTRY: Support for auto-login URLs (e.g., /judge/entry/{CODE}).
+- STATUS TRACKING: Real-time 'Online/Offline' status reflected in Admin Panel.
+
+3. DATABASE MODIFICATIONS (MIGRATION)
+--------------------------------------------------------------------------------
+- TABLE [contestants]: Add 'performance_url' (string, nullable) to store YT links.
+- TABLE [scores]: Ensure unique constraint (judge_id, exposure_id, contestant_id, criterion_id).
+
+4. UI LAYOUT (THE HUD COMPONENTS)
+--------------------------------------------------------------------------------
+A. CENTRAL VIEWPORT [THE STAGE]:
+   - Large 16:9 YouTube Container with 'Scanning' overlay.
+   - Auto-play functionality triggered by contestant selection.
+   - Current contestant name/number HUD overlay.
+
+B. RIGHT SIDEBAR [THE BALLOT]:
+   - Active Exposure Info (e.g., "PRELIMINARY: TALENT").
+   - Criteria List:
+     * Numeric inputs for each criterion.
+     * Real-time sum display.
+     * Weight % indicators.
+   - Action Button: [SUBMIT BALLOT] - Large tactical button with lock effect.
+
+C. BOTTOM BAR [TARGET SELECTION]:
+   - Horizontal scrollable list of Contestants.
+   - Indicators:
+     * GREEN [CHECK]: Scored.
+     * YELLOW [TARGET]: Current selection.
+     * DIMMED: Pending.
+
+5. TECHNICAL FEATURES
+--------------------------------------------------------------------------------
+- AUTO-TABULATOR: Instant JavaScript calculation of total score based on weights.
+- YT INTEGRATION: Use YouTube IFrame API to play/pause and handle URL switches.
+- SUBMISSION LOCK: Once submitted, scores are locked for that node unless
+  reset by Admin.
+- RESPONSIVE DESIGN: Optimized for Tablets/Laptops (Judges usually use tablets).
+
+6. ACTION PLAN
+--------------------------------------------------------------------------------
+1. Update Contestant migration & Model.
+2. Create 'ScoringController' to fetch Active Exposure/Contestants.
+3. Build 'judge-scoring.blade.php' with the Tactical HUD layout.
+4. Implement JS for YouTube Player and Score Calculation.
+5. Setup 'Submit' route to persist data to 'scores' table.
+
+================================================================================
+END OF PLAN - [PENDING APPROVAL]
+================================================================================

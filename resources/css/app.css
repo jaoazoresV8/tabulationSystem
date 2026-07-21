@@ -1,0 +1,190 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    /* Valorant Tactical Palette */
+    --color-background-primary: #0B0F14;
+    --color-background-secondary: #0F141B;
+    --color-panel: #161B22;
+    --color-panel-elevated: #1C2430;
+    --color-border: #2A313D;
+    --color-border-bright: #3D4652;
+    --color-accent: #FF4655;
+    --color-success: #00D084;
+    --color-warning: #F5B941;
+    --color-danger: #FF5D5D;
+    --color-text-primary: #F4F6F8;
+    --color-text-secondary: #8C97A8;
+    --color-disabled: #5A6475;
+
+    /* Typography */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-bebas: 'Bebas Neue', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Base Styles */
+@layer base {
+    body {
+        @apply bg-background-primary text-text-primary font-sans antialiased overflow-hidden selection:bg-accent selection:text-white;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bebas tracking-[0.15em] uppercase;
+    }
+}
+
+/* Tactical Framework Components */
+@layer components {
+    /* The main container machine frame */
+    .tactical-frame {
+        @apply relative border border-border bg-background-secondary flex flex-col overflow-hidden shadow-2xl;
+        box-shadow: 0 0 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(255, 70, 85, 0.02);
+    }
+
+    /* Embedded panel - looks bolted in */
+    .tactical-panel {
+        @apply border border-border bg-panel relative;
+        clip-path: polygon(
+            0 0,
+            calc(100% - 10px) 0, 100% 10px,
+            100% 100%,
+            10px 100%, 0 calc(100% - 10px)
+        );
+    }
+
+    /* sidebar items that aren't buttons but integrated text */
+    .nav-link-tactical {
+        @apply flex items-center gap-4 px-8 py-3 text-[11px] font-mono tracking-[0.2em] text-text-secondary transition-all relative uppercase;
+    }
+
+    .nav-link-tactical:hover {
+        @apply text-white bg-white/5;
+    }
+
+    .nav-link-tactical.active {
+        @apply text-white;
+    }
+
+    .nav-link-tactical.active::before {
+        content: '';
+        @apply absolute left-0 top-0 h-full w-1.5 bg-accent;
+        box-shadow: 4px 0 15px rgba(255, 70, 85, 0.4);
+    }
+
+    /* Mechanical Buttons */
+    .btn-tactical {
+        @apply font-bebas tracking-[0.2em] px-8 py-3 text-sm uppercase transition-all duration-150 relative inline-flex items-center justify-center gap-3;
+        clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+    }
+
+    .btn-tactical-primary {
+        @apply bg-accent text-white hover:brightness-110 active:scale-[0.98];
+    }
+
+    .btn-tactical-outline {
+        @apply border border-border-bright text-text-primary hover:bg-white/5;
+    }
+
+    /* Technical status indicators */
+    .status-badge {
+        @apply px-3 py-1 font-mono text-[9px] tracking-widest uppercase border;
+    }
+
+    .status-badge-active { @apply border-success/30 bg-success/5 text-success; }
+    .status-badge-locked { @apply border-danger/30 bg-danger/5 text-danger; }
+    /* technical icons */
+    .tactical-icon-badge {
+        @apply w-8 h-8 flex items-center justify-center border border-accent/30 bg-accent/5 text-accent relative;
+        clip-path: polygon(0 4px, 4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%);
+    }
+
+    .tactical-icon-badge::before {
+        content: '';
+        @apply absolute top-0 left-0 w-full h-full border border-white/10;
+        clip-path: polygon(0 4px, 4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%);
+        transform: scale(0.85);
+    }
+
+    /* Hologram Deep Effects */
+    .hologram-stage {
+        @apply relative flex flex-col items-center justify-center;
+        perspective: 1000px;
+    }
+
+    .hologram-base {
+        @apply absolute bottom-0 w-64 h-24 bg-accent/20 rounded-[100%] blur-3xl opacity-40;
+        transform: rotateX(75deg);
+    }
+
+    .hologram-ring {
+        @apply absolute border border-accent/30 rounded-full;
+        transform: rotateX(75deg);
+    }
+
+    .hologram-beam {
+        @apply absolute bottom-12 w-[1px] h-64 bg-gradient-to-t from-accent to-transparent opacity-50;
+    }
+
+    .hologram-shield {
+        @apply w-32 h-40 bg-accent/10 border-2 border-accent relative flex items-center justify-center shadow-[0_0_40px_rgba(255,70,85,0.4)];
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        animation: hologram-float 4s ease-in-out infinite;
+    }
+
+    .animate-tactical-reveal {
+        animation: tactical-reveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes tactical-reveal {
+        0% {
+            opacity: 0;
+            transform: translateY(20px) scaleX(0);
+            letter-spacing: 1em;
+            filter: blur(10px);
+        }
+        50% {
+            opacity: 0.5;
+            transform: translateY(0) scaleX(1.2);
+            filter: blur(5px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scaleX(1);
+            letter-spacing: 0.15em;
+            filter: blur(0);
+        }
+    }
+
+    @keyframes hologram-float {
+        0%, 100% { transform: translateY(0) rotateY(0); }
+        50% { transform: translateY(-20px) rotateY(10deg); }
+    }
+
+    @keyframes rotate-slow {
+        from { transform: rotateX(75deg) rotateZ(0deg); }
+        to { transform: rotateX(75deg) rotateZ(360deg); }
+    }
+
+    .animate-rotate-slow {
+        animation: rotate-slow 20s linear infinite;
+    }
+
+    .animate-rotate-fast {
+        animation: rotate-slow 10s linear infinite reverse;
+    }
+}
+
+/* Custom Scrollbar - Minimal */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-background-primary;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-border-bright;
+}
