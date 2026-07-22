@@ -33,8 +33,7 @@
                         <span class="text-white font-bebas text-xl lg:text-2xl skew-x-12">V</span>
                     </div>
                     <div>
-                        <h1 class="text-xl lg:text-3xl tracking-[0.2em] leading-none mb-1">CCDI</h1>
-                        <div class="text-[7px] lg:text-[9px] font-mono text-text-secondary tracking-[0.4em] uppercase">Operations Interface</div>
+                        <h1 class="text-xl lg:text-3xl tracking-[0.2em] leading-none mb-1">VCCDI</h1>
                     </div>
                 </div>
 
