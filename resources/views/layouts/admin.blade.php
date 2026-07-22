@@ -87,6 +87,7 @@
                         <x-nav-item :href="route('judges')" :active="request()->routeIs('judges*')">Judges</x-nav-item>
                         <x-nav-item :href="route('tabulation')" :active="request()->routeIs('tabulation*')">Tabulation</x-nav-item>
                         <x-nav-item :href="route('results')" :active="request()->routeIs('results*')">Results & Reports</x-nav-item>
+                        <x-nav-item :href="route('admin.accounts')" :active="request()->routeIs('admin.accounts*')">Operator Accounts</x-nav-item>
                         <x-nav-item :href="route('guide')" :active="request()->routeIs('guide*')">System Guide</x-nav-item>
                     </ul>
                 </nav>

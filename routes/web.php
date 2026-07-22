@@ -59,6 +59,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/results/{contest}/rankings', [\App\Http\Controllers\Admin\ResultsController::class, 'rankings'])->name('results.rankings');
         Route::get('/results/{contest}/export', [\App\Http\Controllers\Admin\ResultsController::class, 'export'])->name('results.export');
         Route::get('/leaderboard', [\App\Http\Controllers\Admin\LeaderboardController::class, 'index'])->name('leaderboard');
+        Route::get('/accounts', [\App\Http\Controllers\Admin\AdminAccountController::class, 'index'])->name('admin.accounts');
+        Route::post('/accounts', [\App\Http\Controllers\Admin\AdminAccountController::class, 'store'])->name('admin.accounts.store');
+        Route::patch('/accounts/{admin}', [\App\Http\Controllers\Admin\AdminAccountController::class, 'update'])->name('admin.accounts.update');
+        Route::delete('/accounts/{admin}', [\App\Http\Controllers\Admin\AdminAccountController::class, 'destroy'])->name('admin.accounts.destroy');
         Route::get('/settings', function () { return view('admin.settings'); })->name('settings');
         Route::get('/guide', function () { return view('admin.guide'); })->name('guide');
     });
